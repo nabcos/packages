@@ -234,6 +234,7 @@ define Package/ddns-scripts-services/install
 	rm $(1)/usr/share/ddns/default/digitalocean.com-v2.json
 	rm $(1)/usr/share/ddns/default/no-ip.com.json
 	rm $(1)/usr/share/ddns/default/bind-nsupdate.json
+	rm $(1)/usr/share/ddns/default/bind-nsupdate-keyfile.json
 	rm $(1)/usr/share/ddns/default/route53-v1.json
 	rm $(1)/usr/share/ddns/default/cnkuai.cn.json
 endef
@@ -338,9 +339,13 @@ define Package/ddns-scripts-nsupdate/install
 	$(INSTALL_DIR) $(1)/usr/lib/ddns
 	$(INSTALL_BIN) ./files/usr/lib/ddns/update_nsupdate.sh \
 		$(1)/usr/lib/ddns
+	$(INSTALL_BIN) ./files/usr/lib/ddns/update_nsupdate_keyfile.sh \
+		$(1)/usr/lib/ddns
 
 	$(INSTALL_DIR) $(1)/usr/share/ddns/default
 	$(INSTALL_DATA) ./files/usr/share/ddns/default/bind-nsupdate.json \
+		$(1)/usr/share/ddns/default
+	$(INSTALL_DATA) ./files/usr/share/ddns/default/bind-nsupdate-keyfile.json \
 		$(1)/usr/share/ddns/default
 endef
 
